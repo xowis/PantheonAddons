@@ -6,10 +6,10 @@ Install MelonLoader, following along with their [installation instructions](http
 When selecting a version to install, tick `Enable Nightly builds` and install the latest nightly build (0.7.1-ci.2207 at time of writing)
 Once you're finished, run the game once as normal to allow MelonLoader to generate the required libraries. Once this is done, close the game.
 
-This repository contains 3 projects:
-* PantheonAddonLoader, which goes in the `/mods` directory in your game installation.
-* PantheonAddonFramework, which goes in the `/userlibs` directory.
-* Optionally PantheonAddons, which goes in `%APPDATA%\PantheonAddons`. This contains example addons.
+This repository contains 3 projects. Once the solution is built, the following DLLs will be present in the build folder:
+* `PantheonAddonLoader.dll`, which goes in the `/mods` directory in your game installation.
+* `PantheonAddonFramework.dll`, which goes in the `/userlibs` directory.
+* Optionally `PantheonAddons.dll`, which goes in `%APPDATA%\PantheonAddons`. This contains example addons.
 
 ## Developing addons
 Create a new C# library project targeting **.NET 6**
