@@ -7,6 +7,7 @@ When selecting a version to install, tick `Enable Nightly builds` and install th
 Once you're finished, run the game once as normal to allow MelonLoader to generate the required libraries. Once this is done, close the game.
 
 Find us on discord
+
 ![Discord Banner](https://discord.com/api/guilds/1336392386024177786/widget.png?style=banner2)
 
 This repository contains 3 projects. Once the solution is built, the following DLLs will be present in the build folder:
