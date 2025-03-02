@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantheonAddonLoader", "PantheonAddonLoader\PantheonAddonLoader.csproj", "{F659D2D8-CC3D-4852-9BDA-EF3C1F1C367F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantheonAddonFramework", "PantheonAddonFramework\PantheonAddonFramework.csproj", "{A7AAEE4B-9CD9-4A2D-822B-5E2444AC531B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PantheonAddons", "PantheonAddons\PantheonAddons.csproj", "{5AD11519-E168-4023-B7EF-0FB99E79A5E2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F659D2D8-CC3D-4852-9BDA-EF3C1F1C367F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F659D2D8-CC3D-4852-9BDA-EF3C1F1C367F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F659D2D8-CC3D-4852-9BDA-EF3C1F1C367F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F659D2D8-CC3D-4852-9BDA-EF3C1F1C367F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7AAEE4B-9CD9-4A2D-822B-5E2444AC531B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7AAEE4B-9CD9-4A2D-822B-5E2444AC531B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7AAEE4B-9CD9-4A2D-822B-5E2444AC531B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7AAEE4B-9CD9-4A2D-822B-5E2444AC531B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD11519-E168-4023-B7EF-0FB99E79A5E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD11519-E168-4023-B7EF-0FB99E79A5E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD11519-E168-4023-B7EF-0FB99E79A5E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD11519-E168-4023-B7EF-0FB99E79A5E2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
