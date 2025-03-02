@@ -1,7 +1,7 @@
 [![Discord Shield](https://discord.com/api/guilds/1336392386024177786/widget.png?style=shield)](https://discord.gg/JtyuP26w95)
 
 # Pantheon Addons
-This project is an **experimental, third party, unofficial addon API** for Pantheon: Rise of the Fallen. Its primary purpose is to create addons in the game which alter or create user interface objects. It is designed to blend in with the overall design of the native user interface, enhancing the game without breaking immersion.
+This project is an **experimental, third party, unofficial addon API** for Pantheon: Rise of the Fallen. Its primary purpose is to create addons in the game via a readonly API which alter or create user interface objects. It is designed to blend in with the overall design of the native user interface, enhancing the game without breaking immersion.
 
 ## Installation
 Install MelonLoader, following along with their [installation instructions](https://melonwiki.xyz/#/?id=requirements)
