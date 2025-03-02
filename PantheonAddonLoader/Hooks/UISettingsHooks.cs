@@ -1,7 +1,9 @@
 using HarmonyLib;
 using Il2Cpp;
 using Il2CppTMPro;
+using MelonLoader;
 using PantheonAddonFramework;
+using PantheonAddonFramework.Configuration;
 using PantheonAddonLoader.AddonManagement;
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,6 +27,10 @@ public class UISettingsHooks
         var otherButton = tabButtons.GetChild(5);
 
         var tabGeneral = __instance.transform.GetChild(4);
+        var generalLayout = tabGeneral.GetChild(0);
+        var spacer = generalLayout.GetChild(0);
+        var tooltipScaleSlider = generalLayout.GetChild(11);
+        
         var tabOther = __instance.transform.GetChild(9);
         
         var newButton = Object.Instantiate(otherButton, otherButton.position, otherButton.rotation, tabButtons);
@@ -53,7 +59,7 @@ public class UISettingsHooks
         parentRect.sizeDelta =
             new Vector2(parentSize.x + newButton.GetComponent<RectTransform>().sizeDelta.x, parentSize.y);
 
-        var buttonToCopy = tabGeneral.GetChild(0).GetChild(1);
+        var buttonToCopy = generalLayout.GetChild(1);
         
         foreach (var addon in AddonLoader.LoadedAddons)
         {
@@ -68,6 +74,17 @@ public class UISettingsHooks
                     addon.Disable();
                 }
             });
+
+            foreach (var configuration in addon.GetConfiguration())
+            {
+                if (configuration is SliderConfigurationValue sliderConfiguration)
+                {
+                    SetupCustomSlider(addon, sliderConfiguration, modTabPage.GetChild(0), tooltipScaleSlider);
+                    MelonLogger.Msg($"Found slider configuration {sliderConfiguration.Name}");
+                }
+            }
+            
+            GameObject.Instantiate(spacer, spacer.transform.position, spacer.transform.rotation, modTabPage.GetChild(0));
         }
     }
     
@@ -86,5 +103,42 @@ public class UISettingsHooks
         {
             onToggle(toggleComp.isOn);
         })));
+    }
+
+    private static void SetupCustomSlider(Addon addon, SliderConfigurationValue configurationValue, Transform parent, Transform sliderToCopy)
+    {
+        var copy = GameObject.Instantiate(sliderToCopy, sliderToCopy.position, Quaternion.identity, parent);
+        copy.name = $"Slider_{addon.Name}_{configurationValue.Name}";
+        
+        Object.Destroy(copy.GetComponent<UISettings_ConfigSlider>());
+        
+        var textComp = copy.GetChild(0).GetComponent<TextMeshProUGUI>();
+        textComp.text = $"{configurationValue.Name} - {configurationValue.InitialValue:F1}";
+        
+        var sliderObj = copy.GetChild(1);
+        var sliderComp = sliderObj.GetComponent<Slider>();
+        sliderComp.minValue = configurationValue.MinValue;
+        sliderComp.maxValue = configurationValue.MaxValue;
+        sliderComp.value = configurationValue.InitialValue;
+        sliderComp.wholeNumbers = false;
+        
+        sliderComp.onValueChanged.RemoveAllListeners();
+        sliderComp.onValueChanged.AddCall(new InvokableCall(new Action(() =>
+        {
+            sliderComp.value = GetNearestMultiple(sliderComp.value, configurationValue.StepAmount);
+            textComp.text = $"{configurationValue.Name} - {sliderComp.value:F1}";
+            
+            configurationValue.OnValueChanged(sliderComp.value);
+        })));
+
+        var handleObject = sliderObj.GetChild(2).GetChild(0);
+        var tooltip = handleObject.GetComponent<UITooltip>();
+        tooltip.TooltipHeadingText = configurationValue.Name;
+        tooltip.TooltipText = configurationValue.Description;
+    }
+    
+    private static float GetNearestMultiple(float number, float multiple)
+    {
+        return (float)(Math.Round(number / multiple) * multiple);
     }
 }

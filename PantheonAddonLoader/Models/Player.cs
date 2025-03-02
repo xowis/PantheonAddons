@@ -2,9 +2,8 @@ using Il2Cpp;
 using Il2CppPantheonPersist;
 using PantheonAddonFramework;
 using PantheonAddonFramework.Models;
-using PantheonAddonLoader.Hooks;
 
-namespace PantheonAddonLoader;
+namespace PantheonAddonLoader.Models;
 
 public class Player : IPlayer
 {

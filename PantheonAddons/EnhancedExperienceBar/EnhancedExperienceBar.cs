@@ -1,5 +1,6 @@
 ﻿using PantheonAddonFramework;
 using PantheonAddonFramework.Components;
+using PantheonAddonFramework.Configuration;
 using PantheonAddonFramework.Models;
 
 namespace PantheonAddons.EnhancedExperienceBar;
@@ -31,9 +32,9 @@ public sealed class EnhancedExperienceBar : Addon
         _xpWindow?.SetWidth(_originalWidth);
     }
 
-    public override void AddConfiguration()
+    public override IEnumerable<IConfigurationValue> GetConfiguration()
     {
-        Configuration.Add("Test", false);
+        return Array.Empty<IConfigurationValue>();
     }
 
     public override void Dispose()

@@ -1,4 +1,5 @@
 using PantheonAddonFramework.Components;
+using PantheonAddonFramework.Configuration;
 using PantheonAddonFramework.Events;
 
 namespace PantheonAddonFramework;
@@ -6,9 +7,9 @@ namespace PantheonAddonFramework;
 public abstract class Addon : IDisposable
 {
     public ILogger Logger { get; set; }
-    public IConfiguration Configuration { get; set; }
     public IWindowPanelEvents WindowPanelEvents { get; set; }
     public ILocalPlayerEvents LocalPlayerEvents { get; set; }
+    public IPlayerEvents PlayerEvents { get; set; }
     
     public string Name { get; set; }
     public bool Enabled { get; set; }
@@ -18,7 +19,6 @@ public abstract class Addon : IDisposable
     public abstract void OnCreate();
     public abstract void Enable();
     public abstract void Disable();
-    public abstract void AddConfiguration();
-
+    public abstract IEnumerable<IConfigurationValue> GetConfiguration();
     public abstract void Dispose();
 }

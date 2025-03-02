@@ -1,6 +1,4 @@
-using PantheonAddonFramework.Models;
-
-namespace PantheonAddonFramework;
+namespace PantheonAddonFramework.Models;
 
 public interface IPlayer
 {

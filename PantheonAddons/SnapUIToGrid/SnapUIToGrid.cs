@@ -1,5 +1,6 @@
 using PantheonAddonFramework;
 using PantheonAddonFramework.Components;
+using PantheonAddonFramework.Configuration;
 
 namespace PantheonAddons.SnapUIToGrid;
 
@@ -7,6 +8,7 @@ namespace PantheonAddons.SnapUIToGrid;
 public sealed class SnapUIToGrid : Addon
 {
     private bool _isSnapping;
+    private float _snapAmount = 5.0f;
     
     public override void OnCreate()
     {
@@ -23,8 +25,8 @@ public sealed class SnapUIToGrid : Addon
         var windowX = window.X;
         var windowY = window.Y;
 
-        var newX = GetNearestMultiple(windowX, 5.0f);
-        var newY = GetNearestMultiple(windowY, 5.0f);
+        var newX = GetNearestMultiple(windowX, _snapAmount);
+        var newY = GetNearestMultiple(windowY, _snapAmount);
         
         window.SetPosition(newX, newY);
     }
@@ -39,9 +41,12 @@ public sealed class SnapUIToGrid : Addon
         _isSnapping = false;
     }
 
-    public override void AddConfiguration()
+    public override IEnumerable<IConfigurationValue> GetConfiguration()
     {
-        
+        return new IConfigurationValue[]
+        {
+            new SliderConfigurationValue("Snap Amount", "The amount in game units to snap UI to. Larger value means bigger snap movements.", 5.0f, 1.0f, 10.0f, 0.1f, f => _snapAmount = f)
+        };
     }
 
     public override void Dispose()

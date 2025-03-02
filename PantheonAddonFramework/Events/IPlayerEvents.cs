@@ -1,3 +1,5 @@
+using PantheonAddonFramework.Models;
+
 namespace PantheonAddonFramework.Events;
 
 public interface IPlayerEvents

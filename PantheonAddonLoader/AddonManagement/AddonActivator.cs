@@ -48,5 +48,6 @@ internal static class ScriptActivator
         instance.Logger = new AddonLogger();
         instance.WindowPanelEvents = AddonLoader.WindowPanelEvents;
         instance.LocalPlayerEvents = AddonLoader.LocalPlayerEvents;
+        instance.PlayerEvents = AddonLoader.PlayerEvents;
     }
 }
