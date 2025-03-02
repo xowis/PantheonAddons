@@ -17,6 +17,7 @@ public class UISettingsHooks
 {
     private static void Postfix(UISettings __instance)
     {
+        // TODO: Move this out of the hook in to another evented class
         if (__instance.transform.childCount < 11)
         {
             return;
@@ -63,7 +64,7 @@ public class UISettingsHooks
         
         foreach (var addon in AddonLoader.LoadedAddons)
         {
-            SetupCustomToggle(addon, modTabPage.GetChild(0), buttonToCopy, b =>
+            var configurationValue = new BoolConfigurationValue($"Enable {addon.Name}", "", true, b =>
             {
                 if (b)
                 {
@@ -74,13 +75,22 @@ public class UISettingsHooks
                     addon.Disable();
                 }
             });
+            
+            SetupCustomToggle(addon, configurationValue, modTabPage.GetChild(0), buttonToCopy);
 
             foreach (var configuration in addon.GetConfiguration())
             {
-                if (configuration is SliderConfigurationValue sliderConfiguration)
+                switch (configuration)
                 {
-                    SetupCustomSlider(addon, sliderConfiguration, modTabPage.GetChild(0), tooltipScaleSlider);
-                    MelonLogger.Msg($"Found slider configuration {sliderConfiguration.Name}");
+                    case FloatConfigurationValue floatConfigurationValue:
+                        SetupCustomSlider(addon, floatConfigurationValue, modTabPage.GetChild(0), tooltipScaleSlider);
+                        break;
+                    case IntConfigurationValue intConfigurationValue:
+                        SetupCustomSlider(addon, intConfigurationValue, modTabPage.GetChild(0), tooltipScaleSlider);
+                        break;
+                    case BoolConfigurationValue boolConfigurationValue:
+                        SetupCustomToggle(addon, boolConfigurationValue, modTabPage.GetChild(0), buttonToCopy);
+                        break;
                 }
             }
             
@@ -88,24 +98,24 @@ public class UISettingsHooks
         }
     }
     
-    private static void SetupCustomToggle(Addon addon, Transform parent, Transform buttonToCopy, Action<bool> onToggle)
+    private static void SetupCustomToggle(Addon addon, BoolConfigurationValue boolConfigurationValue, Transform parent, Transform buttonToCopy)
     {
         var copy = GameObject.Instantiate(buttonToCopy, buttonToCopy.position, buttonToCopy.rotation, parent);
-        copy.name = $"Toggle_{addon.Name}";
-        copy.GetChild(0).GetComponent<TextMeshProUGUI>().text = addon.Name;
+        copy.name = $"Toggle_{addon.Name}_{boolConfigurationValue.Name}";
+        copy.GetChild(0).GetComponent<TextMeshProUGUI>().text = boolConfigurationValue.Name;
         
         Object.Destroy(copy.GetComponent<UISettings_ConfigBool>());
         
         var toggleComp = copy.GetComponent<Toggle>();
-        toggleComp.isOn = true;
+        toggleComp.isOn = boolConfigurationValue.InitialValue;
         toggleComp.onValueChanged.RemoveAllListeners();
         toggleComp.onValueChanged.AddCall(new InvokableCall(new Action(() =>
         {
-            onToggle(toggleComp.isOn);
+            boolConfigurationValue.OnValueChanged(toggleComp.isOn);
         })));
     }
 
-    private static void SetupCustomSlider(Addon addon, SliderConfigurationValue configurationValue, Transform parent, Transform sliderToCopy)
+    private static void SetupCustomSlider(Addon addon, FloatConfigurationValue configurationValue, Transform parent, Transform sliderToCopy)
     {
         var copy = GameObject.Instantiate(sliderToCopy, sliderToCopy.position, Quaternion.identity, parent);
         copy.name = $"Slider_{addon.Name}_{configurationValue.Name}";
@@ -129,6 +139,39 @@ public class UISettingsHooks
             textComp.text = $"{configurationValue.Name} - {sliderComp.value:F1}";
             
             configurationValue.OnValueChanged(sliderComp.value);
+        })));
+
+        var handleObject = sliderObj.GetChild(2).GetChild(0);
+        var tooltip = handleObject.GetComponent<UITooltip>();
+        tooltip.TooltipHeadingText = configurationValue.Name;
+        tooltip.TooltipText = configurationValue.Description;
+    }
+    
+    // TODO: Clean up duplicate code between this method and one above
+    private static void SetupCustomSlider(Addon addon, IntConfigurationValue configurationValue, Transform parent, Transform sliderToCopy)
+    {
+        var copy = GameObject.Instantiate(sliderToCopy, sliderToCopy.position, Quaternion.identity, parent);
+        copy.name = $"Slider_{addon.Name}_{configurationValue.Name}";
+        
+        Object.Destroy(copy.GetComponent<UISettings_ConfigSlider>());
+        
+        var textComp = copy.GetChild(0).GetComponent<TextMeshProUGUI>();
+        textComp.text = $"{configurationValue.Name} - {configurationValue.InitialValue}";
+        
+        var sliderObj = copy.GetChild(1);
+        var sliderComp = sliderObj.GetComponent<Slider>();
+        sliderComp.minValue = configurationValue.MinValue;
+        sliderComp.maxValue = configurationValue.MaxValue;
+        sliderComp.value = configurationValue.InitialValue;
+        sliderComp.wholeNumbers = true;
+        
+        sliderComp.onValueChanged.RemoveAllListeners();
+        sliderComp.onValueChanged.AddCall(new InvokableCall(new Action(() =>
+        {
+            sliderComp.value = GetNearestMultiple(sliderComp.value, configurationValue.StepAmount);
+            textComp.text = $"{configurationValue.Name} - {sliderComp.value}";
+            
+            configurationValue.OnValueChanged((int)sliderComp.value);
         })));
 
         var handleObject = sliderObj.GetChild(2).GetChild(0);

@@ -45,7 +45,9 @@ public sealed class SnapUIToGrid : Addon
     {
         return new IConfigurationValue[]
         {
-            new SliderConfigurationValue("Snap Amount", "The amount in game units to snap UI to. Larger value means bigger snap movements.", 5.0f, 1.0f, 10.0f, 0.1f, f => _snapAmount = f)
+            new FloatConfigurationValue("Snap Amount", "The amount in game units to snap UI to. Larger value means bigger snap movements.", 5.0f, 1.0f, 10.0f, 0.1f, f => _snapAmount = f),
+            new IntConfigurationValue("Test", "This is a test integer config value to make sure that it all works ok. I like turtles.", 5, 1, 100, 5, i => Logger.Log($"Value is now {i}")),
+            new BoolConfigurationValue("TestBool", "This is a test for checkboxes this time :D", false, b => Logger.Log($"Value is now {b}")),
         };
     }
 

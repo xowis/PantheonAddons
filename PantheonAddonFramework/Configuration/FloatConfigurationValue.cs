@@ -1,6 +1,6 @@
 namespace PantheonAddonFramework.Configuration;
 
-public class SliderConfigurationValue : IConfigurationValue
+public class FloatConfigurationValue : IConfigurationValue
 {
     public string Name { get; }
     public string Description { get; }
@@ -10,7 +10,7 @@ public class SliderConfigurationValue : IConfigurationValue
     public float StepAmount { get; }
     public Action<float> OnValueChanged { get; }    
     
-    public SliderConfigurationValue(string name, string description, float initialValue, float minValue, float maxValue, float stepAmount, Action<float> onValueChanged)
+    public FloatConfigurationValue(string name, string description, float initialValue, float minValue, float maxValue, float stepAmount, Action<float> onValueChanged)
     {
         Name = name;
         Description = description;
