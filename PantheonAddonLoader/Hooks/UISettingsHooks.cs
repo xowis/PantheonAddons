@@ -22,7 +22,7 @@ public class UISettingsHooks
         {
             return;
         }
-        
+
         var tabButtons = __instance.transform.GetChild(3);
 
         var otherButton = tabButtons.GetChild(5);

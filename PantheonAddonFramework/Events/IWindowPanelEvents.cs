@@ -1,4 +1,4 @@
-using PantheonAddonFramework.Components;
+using PantheonAddonFramework.UI;
 
 namespace PantheonAddonFramework.Events;
 

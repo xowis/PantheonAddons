@@ -1,5 +1,5 @@
-using PantheonAddonFramework.Components;
 using PantheonAddonFramework.Events;
+using PantheonAddonFramework.UI;
 
 namespace PantheonAddonLoader.Events;
 

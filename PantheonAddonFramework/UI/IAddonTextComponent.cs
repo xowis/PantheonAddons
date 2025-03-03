@@ -1,4 +1,4 @@
-namespace PantheonAddonFramework.Components;
+namespace PantheonAddonFramework.UI;
 
 public interface IAddonTextComponent
 {

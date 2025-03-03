@@ -1,9 +1,9 @@
 using Il2Cpp;
 using Il2CppTMPro;
-using PantheonAddonFramework.Components;
+using PantheonAddonFramework.UI;
 using UnityEngine;
 
-namespace PantheonAddonLoader.Components;
+namespace PantheonAddonLoader.UI;
 
 public class AddonWindow : IAddonWindow
 {

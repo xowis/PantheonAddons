@@ -1,4 +1,4 @@
-using PantheonAddonFramework.Components;
+using PantheonAddonFramework.AddonComponents;
 using PantheonAddonFramework.Configuration;
 using PantheonAddonFramework.Events;
 

@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using MelonLoader;
 using PantheonAddonFramework;
-using PantheonAddonLoader.Components;
+using PantheonAddonLoader.AddonComponents;
 
 namespace PantheonAddonLoader.AddonManagement;
 

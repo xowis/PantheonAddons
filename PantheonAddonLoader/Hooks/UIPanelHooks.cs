@@ -2,7 +2,7 @@ using HarmonyLib;
 using Il2Cpp;
 using PantheonAddonFramework;
 using PantheonAddonLoader.AddonManagement;
-using PantheonAddonLoader.Components;
+using PantheonAddonLoader.UI;
 
 namespace PantheonAddonLoader.Hooks;
 

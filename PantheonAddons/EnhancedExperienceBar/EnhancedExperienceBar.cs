@@ -1,7 +1,7 @@
 ﻿using PantheonAddonFramework;
-using PantheonAddonFramework.Components;
 using PantheonAddonFramework.Configuration;
 using PantheonAddonFramework.Models;
+using PantheonAddonFramework.UI;
 
 namespace PantheonAddons.EnhancedExperienceBar;
 

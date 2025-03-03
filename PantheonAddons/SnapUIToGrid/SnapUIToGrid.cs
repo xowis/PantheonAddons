@@ -1,6 +1,6 @@
 using PantheonAddonFramework;
-using PantheonAddonFramework.Components;
 using PantheonAddonFramework.Configuration;
+using PantheonAddonFramework.UI;
 
 namespace PantheonAddons.SnapUIToGrid;
 
