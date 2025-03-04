@@ -2,7 +2,7 @@ namespace PantheonAddonFramework.Models;
 
 public interface IPlayer
 {
-    IPlayerStats Stats { get; }
+    IEntityStats Stats { get; }
 
     string Name { get; }
 
