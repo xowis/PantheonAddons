@@ -1,6 +1,6 @@
 namespace PantheonAddonFramework.Models;
 
-public interface IPlayerStats
+public interface IEntityStats
 {
     float CurrentHealth { get; }
     float MaxHealth { get; }

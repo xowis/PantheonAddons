@@ -9,12 +9,12 @@ public class Player : IPlayer
 {
     private readonly EntityPlayerGameObject _entityPlayerGameObject;
 
-    public IPlayerStats Stats { get; }
+    public IEntityStats Stats { get; }
     
     public Player(EntityPlayerGameObject entityPlayerGameObject)
     {
         _entityPlayerGameObject = entityPlayerGameObject;
-        Stats = new PlayerStats(_entityPlayerGameObject.Pools);
+        Stats = new EntityStats(_entityPlayerGameObject.Pools);
     }
 
     public string Name => _entityPlayerGameObject.info.DisplayName;

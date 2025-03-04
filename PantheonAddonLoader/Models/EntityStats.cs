@@ -4,11 +4,11 @@ using PantheonAddonFramework.Models;
 
 namespace PantheonAddonLoader.Models;
 
-public class PlayerStats : IPlayerStats
+public class EntityStats : IEntityStats
 {
     private readonly Pools.Logic _playerPools;
 
-    public PlayerStats(Pools.Logic playerPools)
+    public EntityStats(Pools.Logic playerPools)
     {
         _playerPools = playerPools;
     }
