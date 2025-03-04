@@ -9,9 +9,12 @@ public class Player : IPlayer
 {
     private readonly EntityPlayerGameObject _entityPlayerGameObject;
 
+    public IPlayerStats Stats { get; }
+    
     public Player(EntityPlayerGameObject entityPlayerGameObject)
     {
         _entityPlayerGameObject = entityPlayerGameObject;
+        Stats = new PlayerStats(_entityPlayerGameObject.Pools);
     }
 
     public string Name => _entityPlayerGameObject.info.DisplayName;
@@ -19,7 +22,7 @@ public class Player : IPlayer
     public bool IsMale => _entityPlayerGameObject.info.Gender == Gender.Male;
     public string Race => _entityPlayerGameObject.info.Race.ToString();
     public string Class => _entityPlayerGameObject.info.Class.ToString();
-
+    
     public PlayerExperience GetExperience()
     {
         var experience = _entityPlayerGameObject.Experience;

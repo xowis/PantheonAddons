@@ -1,8 +1,10 @@
+using Il2CppInterop.Runtime.Injection;
 using MelonLoader;
 using PantheonAddonFramework;
+using PantheonAddonLoader.AddonManagement;
 using PantheonAddonLoader.Events;
 
-namespace PantheonAddonLoader.AddonManagement;
+namespace PantheonAddonLoader;
 
 public class AddonLoader : MelonMod
 {
