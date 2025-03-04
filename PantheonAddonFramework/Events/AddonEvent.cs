@@ -1,5 +1,14 @@
 namespace PantheonAddonFramework.Events;
 
+public class AddonEvent
+{
+    private event Action Event = delegate { };
+    
+    public void Subscribe(Action handler) => Event += handler;
+    public void Unsubscribe(Action handler) => Event -= handler;
+    public void Raise() => Event();
+}
+
 public class AddonEvent<T>
 {
     private event Action<T> Event = delegate { }; // Prevents null reference exceptions

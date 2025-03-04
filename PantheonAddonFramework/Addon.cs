@@ -10,6 +10,7 @@ public abstract class Addon : IDisposable
     public IWindowPanelEvents WindowPanelEvents { get; set; }
     public ILocalPlayerEvents LocalPlayerEvents { get; set; }
     public IPlayerEvents PlayerEvents { get; set; }
+    public ILifecycleEvents LifecycleEvents { get; set; }
     
     public string Name { get; set; }
     public bool Enabled { get; set; }

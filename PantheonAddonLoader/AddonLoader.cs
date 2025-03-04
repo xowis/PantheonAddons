@@ -14,6 +14,7 @@ public class AddonLoader : MelonMod
     public static readonly WindowPanelEvents WindowPanelEvents = new();
     public static readonly LocalPlayerEvents LocalPlayerEvents = new();
     public static readonly PlayerEvents PlayerEvents = new();
+    public static readonly LifecycleEvents LifecycleEvents = new();
 
     public override void OnInitializeMelon()
     {
@@ -24,6 +25,11 @@ public class AddonLoader : MelonMod
         }
         
         LoadAddons();
+    }
+
+    public override void OnUpdate()
+    {
+        LifecycleEvents.OnUpdate.Raise();
     }
 
     private static void LoadAddons()
