@@ -47,6 +47,7 @@ internal static class ScriptActivator
     {
         instance.Logger = new AddonLogger();
         instance.Keyboard = new Keyboard();
+        instance.Macros = new Macros();
         
         instance.WindowPanelEvents = AddonLoader.WindowPanelEvents;
         instance.LocalPlayerEvents = AddonLoader.LocalPlayerEvents;
