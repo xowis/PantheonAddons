@@ -15,6 +15,13 @@ This repository contains 3 projects. Once the solution is built, the following D
 * `PantheonAddonFramework.dll`, which goes in the `/userlibs` directory.
 * Optionally `PantheonAddons.dll`, which goes in `%APPDATA%\PantheonAddons`. This contains example addons.
 
+The projects contain Post build events, which assume you're running the Steam version of the game, and that the game is installed to the default Steam path `C:\Program Files (x86)\Steam\steamapps\common\Pantheon Rise of the Fallen`.
+https://github.com/ModsOfPantheon/PantheonAddons/blob/master/PantheonAddonFramework/PantheonAddonFramework.csproj#L10
+https://github.com/ModsOfPantheon/PantheonAddons/blob/master/PantheonAddonLoader/PantheonAddonLoader.csproj#L554
+https://github.com/ModsOfPantheon/PantheonAddons/blob/master/PantheonAddons/PantheonAddons.csproj#L14
+
+Depending on where the source code is located, the project may fail to resolve the dependency libraries. You'll need to remove all library references and re-add them at the correct path.
+
 ## Developing addons
 Create a new C# library project targeting **.NET 6**
 In your project, reference the PantheonAddonFramework library from this repository.
