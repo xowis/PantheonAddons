@@ -46,6 +46,7 @@ internal static class ScriptActivator
     private static void RegisterDependencies(Addon instance)
     {
         instance.Logger = new AddonLogger();
+        instance.Keyboard = new Keyboard();
         
         instance.WindowPanelEvents = AddonLoader.WindowPanelEvents;
         instance.LocalPlayerEvents = AddonLoader.LocalPlayerEvents;

@@ -7,6 +7,8 @@ namespace PantheonAddonFramework;
 public abstract class Addon : IDisposable
 {
     public ILogger Logger { get; set; }
+    public IKeyboard Keyboard { get; set; }
+    
     public IWindowPanelEvents WindowPanelEvents { get; set; }
     public ILocalPlayerEvents LocalPlayerEvents { get; set; }
     public IPlayerEvents PlayerEvents { get; set; }
