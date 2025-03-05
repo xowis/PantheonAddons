@@ -38,7 +38,8 @@ express written consent, modify or cause to be modified any files that are a par
 
 This framework does not, and will never:
 
-* Automate any gameplay actions
+* Automate gameplay actions such as pressing keys automatically
+  * An exception is made for some actions e.g., allowing key presses to trigger macros
 * Interfere with or change any gameplay
 * Draw anything on the screen outside of changes to the user interface
 * Modify any files, everything is applied at runtime
