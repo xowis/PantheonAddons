@@ -1,6 +1,7 @@
 using Il2CppTMPro;
 using PantheonAddonFramework.UI;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PantheonAddonLoader.UI;
 
@@ -35,5 +36,10 @@ public class AddonTextComponent : IAddonTextComponent
     public void Enable(bool enabled)
     {
         Text.gameObject.SetActive(enabled);
+    }
+
+    public void Destroy()
+    {
+        Object.Destroy(Text);
     }
 }

@@ -6,4 +6,5 @@ public interface IAddonTextComponent
     void SetText(string text);
     void SetSize(float width, float height);
     void Enable(bool enabled);
+    void Destroy();
 }
