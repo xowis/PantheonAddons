@@ -31,4 +31,9 @@ public class AddonTextComponent : IAddonTextComponent
         // For now lets just hack this in
         Text.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
     }
+
+    public void Enable(bool enabled)
+    {
+        Text.enabled = enabled;
+    }
 }
