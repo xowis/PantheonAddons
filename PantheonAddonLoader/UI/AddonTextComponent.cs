@@ -34,6 +34,6 @@ public class AddonTextComponent : IAddonTextComponent
 
     public void Enable(bool enabled)
     {
-        Text.enabled = enabled;
+        Text.gameObject.SetActive(enabled);
     }
 }
