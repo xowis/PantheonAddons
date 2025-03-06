@@ -43,6 +43,8 @@ public sealed class EnhancedExperienceBar : Addon
     {
         WindowPanelEvents.OnExperienceBarReady.Unsubscribe(OnExperienceBarReady);
         LocalPlayerEvents.OnExperienceChanged.Unsubscribe(OnExperienceChanged);
+        
+        _xpText?.Destroy();
     }
  
     private void OnPlayerEntered(IPlayer player)
