@@ -24,12 +24,14 @@ public sealed class EnhancedExperienceBar : Addon
     {
         _xpWindow?.SetHeight(_xpWindow.Height + 10);
         _xpWindow?.SetWidth(_xpWindow.Width / 2);
+        _xpText?.Enable(true);
     }
     
     public override void Disable()
     {
         _xpWindow?.SetHeight(_originalHeight);
         _xpWindow?.SetWidth(_originalWidth);
+        _xpText?.Enable(false);
     }
 
     public override IEnumerable<IConfigurationValue> GetConfiguration()
