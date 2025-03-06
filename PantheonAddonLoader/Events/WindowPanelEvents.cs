@@ -7,4 +7,6 @@ public class WindowPanelEvents : IWindowPanelEvents
 {
     public AddonEvent<IAddonWindow> OnExperienceBarReady { get; } = new();
     public AddonEvent<IAddonWindow> OnWindowMoved { get; } = new();
+
+    public AddonEvent<IAddonBar> OnHealthPoolChanged { get; } = new();
 }

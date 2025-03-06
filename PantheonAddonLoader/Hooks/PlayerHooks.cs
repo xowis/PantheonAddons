@@ -36,7 +36,7 @@ public class ExperienceSetHook
     {
         if (Globals.LocalPlayer?.Experience == __instance)
         {
-            AddonLoader.LocalPlayerEvents.OnExperienceChanged.Raise(new PlayerExperience(__instance.CalculateCurrentExperienceIntoLevel(), __instance.CalculateExperienceRequiredToNextLevel(), __instance.CalculateCurrentExperienceIntoLevel()));
+            AddonLoader.LocalPlayerEvents.OnExperienceChanged.Raise(new PlayerExperience(__instance.CalculateCurrentExperienceIntoLevel(), __instance.CalculateExperienceRequiredToNextLevel(), __instance.CalculatePercentThroughCurrentLevel()));
         }
     }
 }

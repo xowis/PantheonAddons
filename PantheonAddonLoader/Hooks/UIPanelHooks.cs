@@ -17,3 +17,19 @@ public class UIPanelHooks
         }
     }
 }
+
+[HarmonyPatch(typeof(UIPoolBar), nameof(UIPoolBar.HandlePoolChanged))]
+public class UIHandlePoolChanged
+{
+    private static void PostFix(UIPoolBar __instance, float current, float max)
+    {
+        if (__instance.name == "Health")
+        {
+
+        }
+        if (__instance.name == "Mana")
+        {
+
+        }
+    }
+}
