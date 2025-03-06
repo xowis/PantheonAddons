@@ -27,7 +27,7 @@ Create a new C# library project targeting **.NET 6**
 In your project, reference the PantheonAddonFramework library from this repository.
 Once you've built your project, place it in `%APPDATA\PantheonAddons`. The loader will automatically find your addon class and load it to the game.
 
-Code snippets/wiki to follow...
+This project makes use of Github's [Wiki](https://github.com/ModsOfPantheon/PantheonAddons/wiki) feature. Code snippets and documents for developing addons are maintained there.
 
 ## Disclaimer regarding cheating/anticheat
 We believe that these addons do not violate the terms and conditions of Pantheon: Rise of the Fallen. From the EULA (as of 7th Jan 2025), we may not:
