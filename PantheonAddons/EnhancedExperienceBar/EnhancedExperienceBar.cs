@@ -22,7 +22,6 @@ public sealed class EnhancedExperienceBar : Addon
     public override void Enable()
     {
         _xpWindow?.SetHeight(_xpWindow.Height + 10);
-        _xpWindow?.SetWidth(_xpWindow.Width / 2);
         _xpText?.Enable(true);
     }
     
