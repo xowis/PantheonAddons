@@ -3,6 +3,7 @@ using PantheonAddonFramework.Configuration;
 using PantheonAddonFramework.Models;
 using PantheonAddonFramework.UI;
 
+
 namespace PantheonAddons.EnhancedBars;
 
 [AddonMetadata("Enhanced health bars Bar", "xowis", "Provides values on the bars")]
@@ -10,12 +11,12 @@ public sealed class EnhancedBars : Addon
 {
     private float _originalHeight;
     private float _originalWidth;
-    private IAddonWindow? _window;
+    private IAddonPoolBar? _poolbar;
     private IAddonTextComponent? _text;
 
     public override void OnCreate()
     {
-        
+        WindowPanelEvents.OnPoolBarPlayerHealthChanged.Subscribe(OnPoolBarPlayerHealthChanged);
     }
 
     public override void Enable()
@@ -35,26 +36,31 @@ public sealed class EnhancedBars : Addon
 
     public override void Dispose()
     {
-        //WindowPanelEvents.OnExperienceBarReady.Unsubscribe(OnGroupMembersReady);
+        WindowPanelEvents.OnPoolBarPlayerHealthChanged.Unsubscribe(OnPoolBarPlayerHealthChanged);
 
         _text?.Destroy();
     }
 
-    private void OnGroupMembersReady(IAddonWindow window)
+    private void OnPoolBarPlayerHealthChanged(PoolBarData data)
     {
-        _originalHeight = window.Height;
-        _originalWidth = window.Width;
-        _window = window;
+        if (_poolbar is null)        
+        {
+            _poolbar = data.PoolBar;
+            _originalHeight = data.PoolBar.Height;
+            _originalWidth = data.PoolBar.Width;
 
-        _window.SetHeight(_originalHeight + 10);
-        _window.SetWidth(_originalWidth / 2);
+            _poolbar.SetHeight(_originalHeight + 100);
+            //_poolbar.SetWidth(_originalWidth / 2);
 
-        _text = _window.AddTextComponent("0 / 0");
-        _text.SetSize(500, 20);
+            _text = _poolbar.AddTextComponent("0 / 0");
+            _text.SetSize(500, 15);            
+        }
+
+        _text?.SetText(CreateText(data));
     }
 
-    private static string CreateText(PlayerExperience playerExperience)
+    private static string CreateText(PoolBarData data)
     {
-        return $"{playerExperience.Current:N0} / {playerExperience.ToNextLevel:N0} ({playerExperience.ExperiencePercentage * 100:F}%)";
+        return $"{data.Current:N0} / {data.Max:N0}";
     }
 }
