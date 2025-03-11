@@ -31,8 +31,6 @@ public class Macros : IMacros
     }
     public IEnumerable<IMacro> GetAll()
     {
-        List<IMacro> _macros = new List<IMacro>();
-
         var macroBar = UIMacroBar.Instance;
         if (macroBar is null)
         {
@@ -49,11 +47,6 @@ public class Macros : IMacros
 
         var macroButtons = buttonRoot.GetComponentsInChildren<UIMacroButton>();
 
-        foreach (var macro in macroButtons)
-        {
-            _macros.Add(new Macro(macro));
-        }
-
-        return _macros.Count > 0 ? _macros.ToArray() : Array.Empty<Macro>();
+        return macroButtons.Select(macro => new Macro(macro));
     }
 }
