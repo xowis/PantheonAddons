@@ -36,10 +36,16 @@ public sealed class EnhancedExperienceBar : Addon
 
     public override IEnumerable<IConfigurationValue> GetConfiguration()
     {
-        return new[]
+        return new IConfigurationValue[]
         {
-            new BoolConfigurationValue("Disable ticks", "Whether or not to disable the ticks marking every 10% on the experience bar.", false, OnDisableTicksChanged)
+            new BoolConfigurationValue("Disable ticks", "Whether or not to disable the ticks marking every 10% on the experience bar.", false, OnDisableTicksChanged),
+            new FloatConfigurationValue("Set Font Size", "Sets the font size for the experience bar.", 18.0f, 10.0f, 72.0f, 1.0f, OnFontSizeChanged)
         };
+    }
+
+    private void OnFontSizeChanged(float obj)
+    {
+        _xpText?.SetFontSize(obj);
     }
 
     private void OnDisableTicksChanged(bool b)
