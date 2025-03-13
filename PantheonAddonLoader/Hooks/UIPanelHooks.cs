@@ -1,5 +1,6 @@
 using HarmonyLib;
 using Il2Cpp;
+using Il2CppLogicalGraphNodes;
 using PantheonAddonFramework;
 using PantheonAddonFramework.Models;
 using PantheonAddonLoader.AddonManagement;
@@ -24,8 +25,9 @@ public class UIPoolBarPoolChanged
 {
     private static void Postfix(UIPoolBar __instance, float current, float max)
     {
-        var parentParentName = __instance.transform.parent.parent.name;
-        if (parentParentName == "Player")
+        var pppName = __instance.transform.parent.parent.parent.name;
+        var ppName = __instance.transform.parent.parent.name;
+        if (ppName == "Player")
         {
             if (__instance.name == "Health")
             {
@@ -36,5 +38,13 @@ public class UIPoolBarPoolChanged
                 AddonLoader.WindowPanelEvents.OnPoolBarPlayerManaChanged.Raise(new PoolBarData(new AddonPoolBar(__instance), current, max));
             }
         }
+
+
+
+        if (ppName == "UITargetOfTarget")
+        {
+
+        }
+        
     }
 }
