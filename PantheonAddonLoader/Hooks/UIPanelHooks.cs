@@ -61,7 +61,10 @@ public class UIPoolBarHandlePoolChangedHook
             var percent = current / max * 100;
             AddonLoader.WindowPanelEvents.OnOffTargetPoolbarChange.Raise(percent);
         }
-
-
+        if (pppName == "Panel_DefensiveTarget")
+        {
+            var percent = current / max * 100;
+            AddonLoader.WindowPanelEvents.OnDefTargetPoolbarChange.Raise(percent);
+        }
     }
 }
