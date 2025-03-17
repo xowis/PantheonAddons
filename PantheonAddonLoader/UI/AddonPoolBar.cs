@@ -1,11 +1,7 @@
-﻿using Harmony;
-using Il2Cpp;
+﻿using Il2Cpp;
 using Il2CppTMPro;
-using MelonLoader;
 using PantheonAddonFramework.UI;
-using PantheonAddonLoader.Models;
 using UnityEngine;
-using UnityEngine.Playables;
 using Object = UnityEngine.Object;
 
 namespace PantheonAddonLoader.UI;
@@ -20,18 +16,6 @@ public class AddonPoolBar : IAddonPoolBar
         _poolbar = poolbar;
         _rectTransform = poolbar.GetComponent<RectTransform>();        
     }
-
-    static void PoolChanged(float current, float max, float delta, PoolChangeType changeType)
-    {
-        MelonLogger.Msg($"PoolChanged fired {current}");
-        var percent = current / max * 100;
-        //AddonLoader.WindowPanelEvents.OnPoolBarChanged.Raise(percent);
-    }
-
-    public float Height => _rectTransform.sizeDelta.y;
-    public float Width => _rectTransform.sizeDelta.x;
-    public float X => _rectTransform.transform.position.x;
-    public float Y => _rectTransform.transform.position.y;
 
     public IAddonTextComponent AddTextComponent(string initialText)
     {
@@ -58,21 +42,6 @@ public class AddonPoolBar : IAddonPoolBar
     public void Destroy()
     {
         Object.Destroy(_poolbar);
-    }
-
-    public void SetHeight(float height)
-    {
-        _rectTransform.sizeDelta = new Vector2(Width, height);
-    }
-
-    public void SetWidth(float newWidth)
-    {
-        _rectTransform.sizeDelta = new Vector2(newWidth, Height);
-    }
-
-    public void SetPosition(float newX, float newY)
-    {
-        _rectTransform.transform.position = new Vector2(newX, newY);
     }
 
     public void SetupWindow()
