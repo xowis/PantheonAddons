@@ -21,6 +21,11 @@ public class UIPanelHooks
             var healthBarPool = __instance.GetComponentInChildren<UIPoolBar>(true);
             AddonLoader.WindowPanelEvents.OnOffensiveTargetReady.Raise(new AddonPoolBar(healthBarPool));
         }
+        if (__instance.name == "Panel_DefensiveTarget")
+        {
+            var healthBarPool = __instance.GetComponentInChildren<UIPoolBar>(true);
+            AddonLoader.WindowPanelEvents.OnDefensiveTargetReady.Raise(new AddonPoolBar(healthBarPool));
+        }
     }
 }
 
@@ -36,7 +41,10 @@ public class UIPoolBarHandlePoolChangedHook
             var percent = current / max * 100;
             AddonLoader.WindowPanelEvents.OnOffTargetPoolbarChange.Raise(percent);
         }
-
-
+        if (pppName == "Panel_DefensiveTarget")
+        {
+            var percent = current / max * 100;
+            AddonLoader.WindowPanelEvents.OnDefTargetPoolbarChange.Raise(percent);
+        }
     }
 }
