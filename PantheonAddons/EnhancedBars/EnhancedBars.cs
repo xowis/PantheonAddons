@@ -11,7 +11,7 @@ public sealed class EnhancedBars : Addon
 {
     private IAddonPoolBar? _OffWindowPoolbar;
     private IAddonTextComponent? _OffWindowPoolbarText;
-    private IAddonPoolBar _DefWindowPoolbar;
+    private IAddonPoolBar? _DefWindowPoolbar;
     private IAddonTextComponent? _DefWindowPoolbarText;
 
     public override void OnCreate()
