@@ -15,8 +15,8 @@ public sealed class EnhancedBars : Addon
     public override void OnCreate()
     {
         WindowPanelEvents.OnOffensiveTargetReady.Subscribe(OnOffensiveTargetReady);
-        WindowPanelEvents.OnOffTargetPoolbarChange.Subscribe(OnOffTargetPoolbarChange);
-        LocalPlayerEvents.OnOffensiveTargetChanged.Subscribe(OnOffensiveTargetChanged);
+        WindowPanelEvents.OnOffTargetPoolbarChange.Subscribe(HandleOffensiveTargetPoolbar);
+        LocalPlayerEvents.OnOffensiveTargetChanged.Subscribe(HandleOffensiveTargetPoolbar);
     }
 
     public override void Enable()
@@ -45,8 +45,8 @@ public sealed class EnhancedBars : Addon
     public override void Dispose()
     {
         WindowPanelEvents.OnOffensiveTargetReady.Unsubscribe(OnOffensiveTargetReady);
-        WindowPanelEvents.OnOffTargetPoolbarChange.Unsubscribe(OnOffTargetPoolbarChange);
-        LocalPlayerEvents.OnOffensiveTargetChanged.Unsubscribe(OnOffensiveTargetChanged);
+        WindowPanelEvents.OnOffTargetPoolbarChange.Unsubscribe(HandleOffensiveTargetPoolbar);
+        LocalPlayerEvents.OnOffensiveTargetChanged.Unsubscribe(HandleOffensiveTargetPoolbar);
 
         _OffWindowPoolbarText?.Destroy();
     }
@@ -55,16 +55,6 @@ public sealed class EnhancedBars : Addon
     {
         _OffWindowPoolbar = poolbar;
         _OffWindowPoolbar.SetupWindow();       
-    }
-
-    private void OnOffTargetPoolbarChange(float percent)
-    {
-        HandleOffensiveTargetPoolbar(percent);
-    }
-
-    private void OnOffensiveTargetChanged(float percent)
-    {
-        HandleOffensiveTargetPoolbar(percent);
     }
 
     private void HandleOffensiveTargetPoolbar(float percent)
