@@ -48,3 +48,20 @@ public class UIPoolBarHandlePoolChangedHook
         }
     }
 }
+
+[HarmonyPatch(typeof(UIPoolBar), nameof(UIPoolBar.HandlePoolChanged))]
+public class UIPoolBarHandlePoolChangedHook
+{
+    private static void Postfix(UIPoolBar __instance, float current, float max, float delta, PoolChangeType changeType)
+    {
+        var pppName = __instance.transform.parent.parent.parent.name;
+
+        if (pppName == "Panel_OffensiveTarget")
+        {
+            var percent = current / max * 100;
+            AddonLoader.WindowPanelEvents.OnOffTargetPoolbarChange.Raise(percent);
+        }
+
+
+    }
+}
