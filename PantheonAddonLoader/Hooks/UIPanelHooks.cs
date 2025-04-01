@@ -14,7 +14,7 @@ public class UIPanelHooks
     {
         if (__instance.name == "Panel_XpBar")
         {
-            AddonLoader.WindowPanelEvents.OnExperienceBarReady.Raise(new XpBarWindow(__instance));
+            AddonLoader.WindowPanelEvents.ExperienceBarReady.Raise(new XpBarWindow(__instance));
         }
         if (__instance.name == "Panel_OffensiveTarget")
         {

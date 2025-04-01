@@ -5,8 +5,8 @@ namespace PantheonAddonLoader.Events;
 
 public class LocalPlayerEvents : ILocalPlayerEvents
 {
-    public AddonEvent<IPlayer> OnLocalPlayerEntered { get; } = new();
-    public AddonEvent<IPlayer> OnLocalPlayerLeft { get; } = new();
-    public AddonEvent<PlayerExperience> OnExperienceChanged { get; } = new();
+    public AddonEvent<IPlayer> LocalPlayerEntered { get; } = new();
+    public AddonEvent<IPlayer> LocalPlayerLeft { get; } = new();
+    public AddonEvent<PlayerExperience> ExperienceChanged { get; } = new();
     public AddonEvent<float> OnOffensiveTargetChanged { get; } = new();
 }
