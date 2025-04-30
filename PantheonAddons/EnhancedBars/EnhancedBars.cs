@@ -17,23 +17,25 @@ public sealed class EnhancedBars : Addon
     public override void OnCreate()
     {
         // Offensive Target Window
-        WindowPanelEvents.OnOffensiveTargetReady.Subscribe(OnOffensiveTargetReady);
-        WindowPanelEvents.OnOffTargetPoolbarChange.Subscribe(HandleOffensiveTargetPoolbar);
-        LocalPlayerEvents.OnOffensiveTargetChanged.Subscribe(HandleOffensiveTargetPoolbar);
+        WindowPanelEvents.OffensiveTargetReady.Subscribe(OffensiveTargetReady);
+        WindowPanelEvents.OffTargetPoolbarChange.Subscribe(HandleOffensiveTargetPoolbar);
+        LocalPlayerEvents.OffensiveTargetChanged.Subscribe(HandleOffensiveTargetPoolbar);
         // Defensive Target Window
-        WindowPanelEvents.OnDefensiveTargetReady.Subscribe(OnDefensiveTargetReady);
-        WindowPanelEvents.OnDefTargetPoolbarChange.Subscribe(HandleDefensiveTargetPoolbar);
-
+        WindowPanelEvents.DefensiveTargetReady.Subscribe(DefensiveTargetReady);
+        WindowPanelEvents.DefTargetPoolbarChange.Subscribe(HandleDefensiveTargetPoolbar);
+        LocalPlayerEvents.DefensiveTargetChanged.Subscribe(HandleDefensiveTargetPoolbar);
     }
 
     public override void Enable()
     {
         _OffWindowPoolbarText?.Enable(true);
+        _DefWindowPoolbarText?.Enable(true);
     }
 
     public override void Disable()
     {
         _OffWindowPoolbarText?.Enable(false);
+        _DefWindowPoolbarText?.Enable(false);
     }
 
     public override IEnumerable<IConfigurationValue> GetConfiguration()
@@ -52,50 +54,43 @@ public sealed class EnhancedBars : Addon
     public override void Dispose()
     {
         // Offensive Target Window
-        WindowPanelEvents.OnOffensiveTargetReady.Unsubscribe(OnOffensiveTargetReady);
-        WindowPanelEvents.OnOffTargetPoolbarChange.Unsubscribe(HandleOffensiveTargetPoolbar);
-        LocalPlayerEvents.OnOffensiveTargetChanged.Unsubscribe(HandleOffensiveTargetPoolbar);
+        WindowPanelEvents.OffensiveTargetReady.Unsubscribe(OffensiveTargetReady);
+        WindowPanelEvents.OffTargetPoolbarChange.Unsubscribe(HandleOffensiveTargetPoolbar);
+        LocalPlayerEvents.OffensiveTargetChanged.Unsubscribe(HandleOffensiveTargetPoolbar);
         _OffWindowPoolbarText?.Destroy();
 
         // Defensive Target Window
-        WindowPanelEvents.OnDefensiveTargetReady.Unsubscribe(OnDefensiveTargetReady);
-        WindowPanelEvents.OnDefTargetPoolbarChange.Unsubscribe(HandleDefensiveTargetPoolbar);
+        WindowPanelEvents.DefensiveTargetReady.Unsubscribe(DefensiveTargetReady);
+        WindowPanelEvents.DefTargetPoolbarChange.Unsubscribe(HandleDefensiveTargetPoolbar);
+        LocalPlayerEvents.DefensiveTargetChanged.Unsubscribe(HandleDefensiveTargetPoolbar);
         _DefWindowPoolbarText?.Destroy();
     }
 
-    private void OnOffensiveTargetReady(IAddonPoolBar poolbar)
+    private void OffensiveTargetReady(IAddonPoolBar poolbar)
     {
         _OffWindowPoolbar = poolbar;
-        _OffWindowPoolbar.SetupWindow();       
+        _OffWindowPoolbar.SetupWindow();
+        _OffWindowPoolbarText = _OffWindowPoolbar?.AddTextComponent("");
+        _OffWindowPoolbarText?.SetSize(500, 20);
+        _OffWindowPoolbarText?.SetFontSize(18);
     }
 
     private void HandleOffensiveTargetPoolbar(float percent)
     {
-        if (_OffWindowPoolbarText == null)
-        {
-            _OffWindowPoolbarText = _OffWindowPoolbar?.AddTextComponent("");
-            _OffWindowPoolbarText?.SetSize(500, 20);
-            _OffWindowPoolbarText?.SetFontSize(18);
-        }
-
         _OffWindowPoolbarText?.SetText(CreateText(percent));
     }
 
-    private void OnDefensiveTargetReady(IAddonPoolBar poolbar)
+    private void DefensiveTargetReady(IAddonPoolBar poolbar)
     {
         _DefWindowPoolbar = poolbar;
         _DefWindowPoolbar.SetupWindow();
+        _DefWindowPoolbarText = _DefWindowPoolbar?.AddTextComponent("");
+        _DefWindowPoolbarText?.SetSize(500, 20);
+        _DefWindowPoolbarText?.SetFontSize(18);
     }
 
     private void HandleDefensiveTargetPoolbar(float percent)
     {
-        if (_DefWindowPoolbarText == null)
-        {
-            _DefWindowPoolbarText = _DefWindowPoolbar?.AddTextComponent("");
-            _DefWindowPoolbarText?.SetSize(500, 20);
-            _DefWindowPoolbarText?.SetFontSize(18);
-        }
-
         _DefWindowPoolbarText?.SetText(CreateText(percent));
     }
 
