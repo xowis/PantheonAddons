@@ -57,7 +57,27 @@ public class TargetSetOffensiveHook
                 percent = current / max * 100;
             }              
  
-            AddonLoader.LocalPlayerEvents.OnOffensiveTargetChanged.Raise(percent);
+            AddonLoader.LocalPlayerEvents.OffensiveTargetChanged.Raise(percent);
+        }
+    }
+}
+
+[HarmonyPatch(typeof(Targets.Logic), nameof(Targets.Logic.SetDefensive))]
+public class TargetSetDefensiveHook
+{
+    private static void Postfix(Targets.Logic __instance)
+    {
+        if (Globals.LocalPlayer?.Targets == __instance)
+        {
+            float percent = 0;
+            if (__instance.Defensive != null)
+            {
+                var current = __instance.Defensive.Pools.GetCurrent(PoolType.Health);
+                var max = __instance.Defensive.Pools.GetMax(PoolType.Health);
+                percent = current / max * 100;
+            }
+
+            AddonLoader.LocalPlayerEvents.DefensiveTargetChanged.Raise(percent);
         }
     }
 }
