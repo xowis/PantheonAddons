@@ -49,6 +49,7 @@ public sealed class EnhancedBars : Addon
     private void OnFontSizeChanged(float obj)
     {
         _OffWindowPoolbarText?.SetFontSize(obj);
+        _DefWindowPoolbarText?.SetFontSize(obj);
     }
 
     public override void Dispose()
